@@ -1,25 +1,18 @@
 import {
-  Container,
-  Text,
-  Divider,
   Box,
-  Image,
-  Button,
-  SimpleGrid,
+  Container,
+  Divider,
   Flex,
+  SimpleGrid,
+  Text,
 } from "@chakra-ui/react"
-
-import { FiSearch } from "@react-icons/all-files/fi/FiSearch"
-import { FiShoppingBag } from "@react-icons/all-files/fi/FiShoppingBag"
-import { useState, useEffect } from "react"
-import Item from "../components/item"
 import React from "react"
+import { useSelector } from "react-redux"
 import Footer from "../components/footer"
-import { graphql } from "gatsby"
+import Item from "../components/item"
 
-function Shop({ data }) {
-  const [products, setProducts] = useState([1, 2, 3, 4, 5])
-  const { allMarkdownRemark: product } = data
+function Shop() {
+  const products = useSelector((state: any) => state.shop.products)
 
   return (
     <>
@@ -50,14 +43,16 @@ function Shop({ data }) {
             spacing="40px"
             mb={32}
           >
-            {product.nodes.map((product, index) => (
+            {products.map((product, index) => (
               <Item
-                title={product.frontmatter.title}
-                oldPrice={product.frontmatter.oldPrice}
-                newPrice={product.frontmatter.newPrice}
-                imagePath={product.frontmatter.imagePath}
-                category={product.frontmatter.category}
-                description={product.html}
+                id={product.id}
+                title={product.title}
+                oldPrice={product.oldPrice}
+                newPrice={product.newPrice}
+                imagePath={product.imagePath}
+                category={product.category}
+                description={product.description}
+                color={product.color}
                 key={index}
               />
             ))}
@@ -68,22 +63,4 @@ function Shop({ data }) {
     </>
   )
 }
-
-export const pageQuery = graphql`
-  query MyQuery {
-    allMarkdownRemark {
-      nodes {
-        frontmatter {
-          title
-          oldPrice
-          newPrice
-          imagePath
-          category
-        }
-        html
-      }
-    }
-  }
-`
-
 export default Shop

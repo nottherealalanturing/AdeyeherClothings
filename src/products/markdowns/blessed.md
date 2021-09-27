@@ -1,5 +1,5 @@
 ---
-imagePath: "blessed black.png"
+imagePath: "Blessed"
 category: "T-Shirt"
 title: "Blessed"
 oldPrice: "121"

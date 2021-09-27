@@ -10,9 +10,10 @@ import {
   Button,
   Link as ChakraLink,
   useDisclosure,
+  Flex,
 } from "@chakra-ui/react"
-import React from "react"
-import { Link as GatsbyLink } from "gatsby"
+import React, { useState } from "react"
+import { Link as GatsbyLink, navigate } from "gatsby"
 import {
   Modal,
   ModalOverlay,
@@ -23,16 +24,27 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react"
 import Card from "./ProductCard/card"
+import SelectColor from "./SelectColor"
+import { bindActionCreators } from "redux"
+import { useDispatch } from "react-redux"
+import { actionCreators } from "../store/actions"
 
-export default function Item({
+const Item = ({
+  id,
   title,
   oldPrice,
   newPrice,
   imagePath,
   category,
   description,
-}) {
+  color,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [shirtColor, setShirtColor] = useState(color)
+  const dispatch = useDispatch()
+
+  const { AddToCart } = bindActionCreators(actionCreators, dispatch)
+  const imageSrc = `${imagePath}${shirtColor}.png`
   return (
     <Center py={12}>
       <Box
@@ -59,7 +71,7 @@ export default function Item({
             pos: "absolute",
             top: 5,
             left: 0,
-            backgroundImage: `url(${imagePath})`,
+            backgroundImage: `url(${imageSrc})`,
             filter: "blur(15px)",
             zIndex: -1,
           }}
@@ -73,9 +85,10 @@ export default function Item({
             rounded={"lg"}
             width={[202, 222, 242, 262, 282]}
             objectFit={"contain"}
-            src={imagePath}
+            src={imageSrc}
           />
         </Box>
+
         <Stack pt={32} align={"center"}>
           <Text color={"gray.500"} fontSize={"sm"} textTransform={"uppercase"}>
             {category}
@@ -85,13 +98,14 @@ export default function Item({
           </Heading>
           <Stack direction={"row"} align={"center"}>
             <Text fontSize={"xl"} fontWeight={500}>
-              ${newPrice}
+              ₦{newPrice}
             </Text>
             <Text textDecoration={"line-through"} color={"gray.600"}>
-              ${oldPrice}
+              ₦{oldPrice}
             </Text>
           </Stack>
         </Stack>
+        <SelectColor setShirtColor={setShirtColor} />
         <Stack mt={8} direction={"row"} spacing={4}>
           <>
             <Button
@@ -122,11 +136,13 @@ export default function Item({
                 <ModalCloseButton />
                 <ModalBody p={4}>
                   <Card
+                    id={id}
                     title={title}
                     description={description}
                     price={newPrice}
                     category={category}
-                    imagePath={imagePath}
+                    imagePath={imageSrc}
+                    color={shirtColor}
                   />
                 </ModalBody>
               </ModalContent>
@@ -148,6 +164,10 @@ export default function Item({
             _focus={{
               bg: "blue.500",
             }}
+            onClick={() => {
+              AddToCart(id, shirtColor)
+              navigate("/cart")
+            }}
           >
             BUY
           </Button>
@@ -156,3 +176,5 @@ export default function Item({
     </Center>
   )
 }
+
+export default Item

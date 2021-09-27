@@ -6,13 +6,16 @@ import "@fontsource/montserrat"
 import "@fontsource/overlock"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-
 import "@fontsource/roboto"
+import { Provider } from "react-redux"
+import { store } from "./src/store/store/store"
 
 export const wrapPageElement = ({ element }) => {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      <Layout location={element.props.location}>{element}</Layout>
+      <Provider store={store}>
+        <Layout location={element.props.location}>{element}</Layout>
+      </Provider>
     </ChakraProvider>
   )
 }

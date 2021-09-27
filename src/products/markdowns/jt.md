@@ -1,5 +1,5 @@
 ---
-imagePath: "jt black.png"
+imagePath: "jt"
 category: "T-Shirt"
 title: "Jesus & Therapy"
 oldPrice: "121"

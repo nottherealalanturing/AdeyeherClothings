@@ -1,4 +1,4 @@
-import {
+/* import {
   Button,
   Flex,
   Icon,
@@ -35,7 +35,7 @@ const Product = ({ name, oldPrice, discount, newPrice, inStock }) => {
     <Flex justifyContent="center" alignItems="center">
       <Flex
         justifyContent="space-around"
-        /* w="100vw" */
+        
         w="100%"
         direction={direction}
         alignItems="center"
@@ -125,3 +125,4 @@ const Product = ({ name, oldPrice, discount, newPrice, inStock }) => {
 }
 
 export default Product
+ */

@@ -1,5 +1,5 @@
 ---
-imagePath: "just grace black.png"
+imagePath: "JustGrace"
 category: "T-Shirt"
 title: "Just Grace"
 oldPrice: "121"

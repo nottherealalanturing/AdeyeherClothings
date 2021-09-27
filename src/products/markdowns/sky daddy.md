@@ -1,5 +1,5 @@
 ---
-imagePath: "sky daddy black.png"
+imagePath: "SkyDaddy"
 category: "T-Shirt"
 title: "Sky Daddy"
 oldPrice: "121"

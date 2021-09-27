@@ -1,5 +1,5 @@
 ---
-imagePath: "fourth man black.png"
+imagePath: "FourthMan"
 category: "T-Shirt"
 title: "Fourth Man"
 oldPrice: "121"

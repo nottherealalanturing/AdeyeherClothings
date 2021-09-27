@@ -15,8 +15,21 @@ import { useBreakpointValue } from "@chakra-ui/react"
 import { Flex, Text, Image } from "@chakra-ui/react"
 import { StaticImage } from "gatsby-plugin-image"
 import React, { useState } from "react"
+import { useDispatch } from "react-redux"
+import { bindActionCreators } from "redux"
+import { actionCreators } from "../../store/actions"
 
-const Card = ({ title, description, price, category, imagePath }) => {
+const Card = ({
+  id,
+  title,
+  description,
+  price,
+  category,
+  imagePath,
+  color,
+}) => {
+  const dispatch = useDispatch()
+  const { AddToCart } = bindActionCreators(actionCreators, dispatch)
   return (
     <Flex p={4} alignItems="center">
       <Flex w="80%">
@@ -68,6 +81,9 @@ const Card = ({ title, description, price, category, imagePath }) => {
           }}
           _focus={{
             bg: "gray.400",
+          }}
+          onClick={() => {
+            AddToCart(id, color)
           }}
         >
           Add to cart

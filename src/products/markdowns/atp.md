@@ -1,5 +1,5 @@
 ---
-imagePath: "author preserver black.png"
+imagePath: "AuthorPreserver"
 category: "T-Shirt"
 title: "Author Preserver"
 oldPrice: "121"
